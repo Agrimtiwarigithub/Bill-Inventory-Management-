@@ -1,0 +1,184 @@
+use Shubham_2;
+Create Table Product_
+(PID CHAR(5),
+PDESC VARCHAR(20),
+PRICE INT,
+CATEGORY VARCHAR(20),
+SID_ CHAR(5));
+
+INSERT INTO Product_
+values('P0001', 'Good', 90, 'IT', 'S0001');
+INSERT INTO Product_
+values('P0002', 'Average', 80, 'HA', 'S0002');
+INSERT INTO Product_
+values('P0003', 'Bad', 90, 'IT', 'S0003');
+INSERT INTO Product_
+values('P0004', 'V.Good', 50, 'IT', 'S0004');
+INSERT INTO Product_
+values('P0005', 'Bad', 85, 'HC', 'S0005');
+INSERT INTO Product_
+values('P0006', 'Average', 77, 'HC', 'S0006');
+INSERT INTO Product_
+values('P0007', 'Bad', 66, 'HA', 'S0007');
+INSERT INTO Product_
+values('P0008', 'V.Good', 90, 'IT', 'S0008');
+INSERT INTO Product_
+values('P0009', 'Good', 99, 'HA', 'S0009');
+INSERT INTO Product_
+values('P0010', 'Average', 73, 'HC', 'S0010');
+INSERT INTO Product_
+values('P0011', 'Bad', 22, 'HA', 'S0011');
+INSERT INTO Product_
+values('P0012', 'Good', 43, 'HC', 'S0012');
+INSERT INTO Product_
+values('P0013', 'Bad', 71, 'IT', 'S0013');
+INSERT INTO Product_
+values('P0014', 'Average', 90, 'HA', 'S0014');
+INSERT INTO Product_
+values('P0015', 'Bad', 64, 'HC', 'S0015');
+
+select * from Product_;
+
+alter table Product_
+alter column PDESC VARCHAR(20) NOT NULL;
+
+ALTER TABLE Product_
+ALTER COLUMn PID CHAR(5) NOT NULL;
+ALTER TABLE Product_
+add constraint pmpt primary key (PID);
+alter table Product_
+add constraint ckpt check (price>0);
+
+-----------------------------------------------------------------
+
+CREATE TABLE SUPPLIER_
+(SID_ CHAR(5),
+SNAME VARCHAR(20) NOT NULL,
+SADD VARCHAR(40) NOT NULL,
+SCITY VARCHAR(15) DEFAULT'Delhi',
+SPHONE CHAR(10) unique,
+EMAIL VARCHAR(30));
+
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0001','Shubham', 'flat no.99,B-9', '8823431211', 'shubh@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0002','Praveen', 'flat no.20,B-10', '9999537089', 'praveen@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0003','Pappu', 'flat no.1161,B-2', '9910433706', 'pappu@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0004','Sahil', 'flat no.111,B-4', '8860121223', 'sahil@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0005','Rahul', 'flat no.10,B-9', '9960460411', 'rahul@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0006','Sandeep', 'flat no.89,B-11', '8899112240', 'san@gmail.com');
+INSERT INTO SUPPLIER_(SID_, SNAME, SADD, SPHONE, EMAIL)
+VALUES('S0007','Manav', 'flat no.86,B-2', '9910445511', 'manav@gmail.com');
+
+select * from SUPPLIER_;
+select * from Product_;
+
+ALTER TABLE SUPPLIER_
+ALTER COLUMN SID_ CHAR(5) NOT NULL;
+alter table SUPPLIER_
+ADD CONSTRAINT PKSR PRIMARY KEY (SID_);
+
+ALTER TABLE Product_
+add constraint fkpt foreign key (SID_) REFERENCES SUPPLIER_(SID_);
+---Mere khyal se Foreign key valey column ke inputs or rows dono References valey column ke inputs or rows se kam honey chahiye.-----
+
+DROP TABLE Product_;
+DROP TABLE SUPPLIER_;
+
+-----------
+Create table Customer
+(CID CHAR(5) NOT NULL,
+CNAME VARCHAR(15) NOT NULL,
+ADDRESS_ VARCHAR(20) NOT NULL,
+CITY VARCHAR(15) NOT NULL,
+PHONE CHAR(10) NOT NULL,
+EMAIL VARCHAR(20) NOT  NULL,
+DOB DATE CHECK(DOB>'2000-1-1'));
+
+INSERT INTO Customer
+values('C0001', 'Bhageshwari', 'Model Town, 23A', 'New Delhi', '1212343421', 'bhagesh@gmail.com', '2000-1-2');
+INSERT INTO Customer
+values('C0002', 'Rakesh', 'Galaxy, 3b', 'Mumbai', '1211211211', 'rakesh@gmail.com', '2000-2-2');
+INSERT INTO Customer
+values('C0003', 'Priya', 'Flat no.1240', 'U.P.', '9999882210', 'priya@gmail.com', '2000-1-2');
+INSERT INTO Customer
+values('C0004', 'Aakash', 'Paschim vihar, 11', 'New Delhi', '9910334706', 'aakash@gmail.com', '2001-1-2');
+INSERT INTO Customer
+values('C0005', 'Sakshi', 'Rohtak, 23C', 'Haryana', '9910122312', 'sakshi@gmail.com', '2002-5-12');
+INSERT INTO Customer
+values('C0006', 'Pranav', 'Floor_12', 'New Delhi', '1011121314', 'pranav@gmail.com', '2003-10-21');
+
+select * from Customer;
+
+alter table Customer
+alter column CID CHAR(5) NOT NULL;
+alter table Customer
+add constraint pkct primary key (CID);
+
+CREATE TABLE Orders
+(OID CHAR(5),
+ODATE DATE,
+CID CHAR(5),
+PID CHAR(5),
+OQTY INT CHECK(OQTY>=1));
+
+INSERT INTO Orders
+values('O0001', '2000-1-23', 'C0001', 'P0001', 3);
+INSERT INTO Orders
+values('O0002', '2003-2-20', 'C0002', 'P0002', 2);
+INSERT INTO Orders
+values('O0003', '2002-1-2', 'C0003', 'P0003', 1);
+INSERT INTO Orders
+values('O0004', '2001-3-2', 'C0004', 'P0004', 2);
+INSERT INTO Orders
+values('O0005', '2000-3-11', 'C0005', 'P0005', 4);
+
+SELECT * FROM Orders;
+
+alter table Orders
+add constraint fkor foreign key (CID) REFERENCES Customer (CID);
+alter table Orders
+add constraint fkor2 foreign key (PID) REFERENCES Product_(PID);
+
+----
+Create table Stock
+(PID CHAR(5),
+SQTY INT CHECK(SQTY>=0),
+ROL INT ,
+MOQ INT CHECK(MOQ>=5));
+
+INSERT INTO Stock
+values('P0001', 2, 3, 10);
+INSERT INTO Stock
+values('P0002', 1,2,9);
+INSERT INTO Stock
+values('P0003',2,1,7);
+INSERT INTO Stock
+values('P0004',2,4,10);
+INSERT INTO Stock
+values('P0005',1,1,7);
+INSERT INTO Stock
+values('P0006',3,3,8);
+
+ALTER TABLE Stock
+add constraint fksk foreign key (PID) REFERENCES Product_ (PID);
+
+Select OID,ODATE,CNAME,ADDRESS_,Phone,PDESC,PRICE,OQTY, (OQTY-SQTY)*Price as AMT from SUPPLIER_ as S
+inner join Product_ as P ON P.SID_=S.SID_
+inner join Stock as T ON P.PID=T.PID
+inner join Orders as O ON T.PID=O.PID
+inner join Customer as C ON O.CID=C.CID;
+
+Create View Bill as
+Select OID,ODATE,CNAME,ADDRESS_,Phone,PDESC,PRICE,OQTY, (OQTY-SQTY)*Price as AMT from SUPPLIER_ as S
+inner join Product_ as P ON P.SID_=S.SID_
+inner join Stock as T ON P.PID=T.PID
+inner join Orders as O ON T.PID=O.PID
+inner join Customer as C ON O.CID=C.CID;
+
+Select * from Bill;
+
